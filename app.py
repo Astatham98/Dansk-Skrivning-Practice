@@ -18,7 +18,7 @@ class DanskSkrivningApp:
     def __init__(self, root):
         self.root = root
         self.root.title("DU3 Skrivning - Practice")
-        self.root.geometry("900x1000")
+        self.root.geometry("1920x1080")
         self.root.minsize(700, 600)
         self.root.protocol("WM_DELETE_WINDOW", self.close_window)
 
@@ -42,9 +42,9 @@ class DanskSkrivningApp:
         style = ttk.Style()
         if "clam" in style.theme_names():
             style.theme_use("clam")
-        style.configure("Title.TLabel", font=("Malgun Gothic", 18, "bold"))
-        style.configure("Timer.TLabel", font=("Malgun Gothic", 22, "bold"))
-        style.configure("Section.TLabel", font=("Malgun Gothic", 11, "bold"))
+        style.configure("Title.TLabel", font=("Segoe UI", 20, "bold"))
+        style.configure("Timer.TLabel", font=("Segoe UI", 28, "bold"))
+        style.configure("Section.TLabel", font=("Segoe UI", 13, "bold"))
         self.style = style
         self.toolbar = ttk.Frame(self.root, padding=(12, 8))
         self.toolbar.pack(fill="x")
@@ -187,7 +187,7 @@ class DanskSkrivningApp:
         ttk.Label(
             content,
             text="DU3 = complaint + email (min. 90 words)",
-            font=("Malgun Gothic", 11),
+            font=("Segoe UI", 13),
         ).pack(pady=(0, 30))
         ttk.Button(
             content,
@@ -288,7 +288,7 @@ class DanskSkrivningApp:
             height=height,
             wrap="word",
             undo=True,
-            font=("Malgun Gothic", 11),
+            font=("Segoe UI", 13),
         )
         text_widget.grid(row=row, column=0, sticky="nsew")
         text_widget.bind("<<Modified>>", self.update_word_counts)
@@ -518,7 +518,7 @@ class DanskSkrivningApp:
         viewer = tk.Toplevel(self.root)
         viewer.title(os.path.basename(path))
         viewer.geometry("760x600")
-        text = tk.Text(viewer, wrap="word", padx=12, pady=12)
+        text = tk.Text(viewer, wrap="word", padx=12, pady=12, font=("Segoe UI", 13))
         text.pack(fill="both", expand=True)
         text.insert("1.0", content)
         text.configure(state="disabled")
