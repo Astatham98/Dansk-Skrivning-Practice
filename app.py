@@ -272,14 +272,21 @@ class DanskSkrivningApp:
             content, text="Words: 0 / 90", foreground="#b42318"
         )
         self.email_count_label.grid(row=10, column=0, sticky="w", pady=(4, 10))
+        bottom_controls = ttk.Frame(content)
+        bottom_controls.grid(row=11, column=0, sticky="ew", pady=(4, 0))
+        bottom_controls.columnconfigure(0, weight=1)
+        bottom_controls.columnconfigure(1, weight=1)
         ttk.Button(
-            content,
+            bottom_controls,
+            text="Back",
+            command=self.confirm_back_to_menu,
+        ).grid(row=0, column=0, sticky="w")
+        ttk.Button(
+            bottom_controls,
             text="Finished",
             command=self.finish_attempt,
             style="Finished.TButton",
-        ).grid(
-            row=11, column=0, sticky="e", ipady=4
-        )
+        ).grid(row=0, column=1, sticky="e", ipady=4)
         self.apply_theme()
 
     def create_text_area(self, parent, height, row):
@@ -526,6 +533,19 @@ class DanskSkrivningApp:
         text.bind("<Button-4>", self.scroll_text)
         text.bind("<Button-5>", self.scroll_text)
         self.apply_theme()
+
+    def confirm_back_to_menu(self):
+        if not self.active_attempt:
+            self.show_menu()
+            return
+
+        discard = messagebox.askyesno(
+            "Return to menu?",
+            "This attempt has not been saved. Return to the menu and discard it?",
+            parent=self.root,
+        )
+        if discard:
+            self.show_menu()
 
     def close_window(self):
         if self.active_attempt:
